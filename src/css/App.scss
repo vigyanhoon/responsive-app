@@ -1,0 +1,52 @@
+@import "./Common.scss";
+
+.app {
+  padding: 20px;
+}
+
+.divider {
+  height: 3px;
+  background-color: #d6d6d6;
+}
+
+.logoText {
+  margin: 20px 0px;
+  font-weight: 700;
+}
+
+.content {
+  display: flex;
+  flex-flow: wrap;
+
+  .entryPage {
+    flex: 1;
+    min-width: 400px;
+  }
+
+  .rightPane {
+    flex: 2;
+
+    .bottomPane {
+      display: flex;
+      flex-flow: wrap;
+    }
+
+    .expensePage {
+      flex: 1;
+      min-width: 400px;
+    }
+
+    .analysisPage {
+      flex: 1;
+      min-width: 400px;
+    }
+  }
+}
+
+.footer {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+}
