@@ -1,5 +1,4 @@
 import React from 'react';
-import {useRef} from 'react';
 import '../css/EntryPage.scss';
 
 export default function EntryPage({categories}) {
@@ -32,7 +31,7 @@ export default function EntryPage({categories}) {
             Category
             <select>
               { categories.map(category=>
-                <option value={category}>{category}</option>
+                <option key={category} value={category}>{category}</option>
               )}
             </select>
           </label>

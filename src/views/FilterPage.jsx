@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState } from 'react';
 import '../css/FilterPage.scss';
 
 export default function FilterPage({ categories }) {
@@ -25,7 +24,7 @@ export default function FilterPage({ categories }) {
             Category
             <select>
               {categories.map(category =>
-                <option value={category}>{category}</option>
+                <option key={category} value={category}>{category}</option>
               )}
             </select>
           </label>
