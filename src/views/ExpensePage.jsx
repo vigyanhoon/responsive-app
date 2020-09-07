@@ -1,7 +1,7 @@
 import React from 'react';
 import '../css/ExpensePage.scss';
 
-export default function ExpensePage(props) {
+export default function ExpensePage({filteredData}) {
   return (
     <div className='expensePage card'>
       <div className='header cardHeader'>
@@ -18,13 +18,13 @@ export default function ExpensePage(props) {
               <th>D/C</th>
             </tr>
             {
-              props.filteredData.map(data =>
-                <tr key={data.txId}>
-                  <td>{data.txId}</td>
+              filteredData.map(data =>
+                <tr key={data.txnId} identifier={data.txnId}>
+                  <td>{data.txnId}</td>
                   <td>{data.description}</td>
                   <td>{data.category}</td>
                   <td>{data.amount}</td>
-                  <td>{data.type}</td>
+                  <td>{data.paymentType}</td>
                 </tr>
               )
             }

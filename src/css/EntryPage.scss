@@ -6,26 +6,26 @@
       display: flex;
       flex-direction: column;
       flex: 1;
-    }
 
-    form label {
-      display:flex;
-      justify-content: space-between;
-      height: 30px;
-    }
+      label {
+        display:flex;
+        justify-content: space-between;
+        height: 30px;
+      }
 
-    form select{
-      width: 177px;
-    }
+      select{
+        width: 177px;
+      }
 
-    form input {
-      width: 170px;
-    }
+      input {
+        width: 170px;
+      }
 
-    form input[type=submit] {
-      align-self: center;
-      height: 30px;
-      margin: 10px 0;
+      input[type=submit] {
+        align-self: center;
+        height: 30px;
+        margin: 10px 0;
+      }
     }
   }
 }

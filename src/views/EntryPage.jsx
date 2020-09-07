@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useRef } from 'react';
 import '../css/EntryPage.scss';
 
-export default function EntryPage({ categories }) {
+export default function EntryPage({ categories, addTransaction }) {
   const paymentType = useRef(['Make payment', 'Receive payment']);
 
   const initialState = {
@@ -10,13 +10,14 @@ export default function EntryPage({ categories }) {
     txnDate: '',
     paymentType: '',
     category: '',
-    descripton: ''
+    description: ''
   }
 
   const [state, setState] = useState(initialState);
 
   const saveEntry = (event) => {
     event.preventDefault();
+    addTransaction(state);
     setState(initialState)
   }
 
@@ -25,6 +26,7 @@ export default function EntryPage({ categories }) {
     let value = event.target.value;
     
     if (name === 'amount') value = value.replace(/[^0-9.]/g, '');
+
     setState({ ...state, [name]: value });
   }
 
@@ -67,7 +69,7 @@ export default function EntryPage({ categories }) {
           <br />
           <label>
             Description
-            <input type='text' value={state.descripton} name='descripton' onChange={onChange} maxLength='15' required />
+            <input type='text' value={state.description} name='description' onChange={onChange} maxLength='15' required />
           </label>
           <br />
           <input type='submit' value='Submit' />
