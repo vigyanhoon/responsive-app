@@ -28,9 +28,9 @@ function App() {
     <div className="app">
       <Header />
       <div className='content'>
-        <EntryPage categories={categories.current} />
+        <EntryPage categories={categories.current}/>
         <div className='rightPane'>
-          <FilterPage categories={categories.current} />
+          <FilterPage categories={categories.current}/>
           <div className='bottomPane'>
             <ExpensePage filteredData={filteredData}/>
             <AnalysisPage />

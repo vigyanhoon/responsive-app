@@ -11,18 +11,20 @@ export default function FilterPage({ categories }) {
         <form>
           <label>
             Frequency
-            <select>
-              <option value="current">Current</option>
-              <option value="monthly">Monthly</option>
+            <select required defaultValue=''>
+              <option hidden value=''>select</option>
+              <option value='current'>Current</option>
+              <option value='monthly'>Monthly</option>
             </select>
           </label>
           <label>
             Month
-            <input type="date" name="name" />
+            <input type='date' name='name' />
           </label>
           <label>
             Category
-            <select>
+            <select defaultValue=''>
+              <option hidden value=''>select</option>
               {categories.map(category =>
                 <option key={category} value={category}>{category}</option>
               )}
