@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRef, useState } from 'react';
 import './css/App.scss';
 import Header from './views/Header';
@@ -80,15 +80,22 @@ function App() {
     setFilteredData(data);
   }
 
-  // for (let i = 0; i < 100; i++) {
-  //   const obj = {}
-  //   obj.txnId = 'Txn' + i;
-  //   obj.description = 'desc';
-  //   obj.category = categories.current[Math.floor(Math.random() * 7)];
-  //   obj.amount = Math.floor(Math.random() * 1000);
-  //   obj.paymentType = Math.floor(Math.random() * 2) === 1 ? 'Receive payment' : 'Make payment';
-  //   filteredData.push(obj);
-  // }
+  // useEffect(()=>{
+  //   const data = []
+  //   for (let i = 0; i < 5; i++) {
+  //     const obj = {}
+  //     obj.txnId = 'Txn' + i;
+  //     obj.description = 'desc';
+  //     obj.category = categories.current[Math.floor(Math.random() * 7)];
+  //     obj.amount = Math.floor(Math.random() * 1000);
+  //     obj.paymentType = Math.floor(Math.random() * 2) === 1 ? MAKE : RECEIVE;
+  //     obj.txnDate = '2020-05-05';
+  //     data.push(obj);
+  //   }
+  //   setLast10Transactions(data);
+  //   setFilteredData(data);
+  // },[])
+  
 
   return (
     <div className="app">
@@ -99,7 +106,7 @@ function App() {
           <FilterPage categories={categories.current} filterData={filterData} periodType={periodType.current}/>
           <div className='bottomPane'>
             <ExpensePage filteredData={filteredData} />
-            <AnalysisPage />
+            <AnalysisPage filteredData={filteredData}/>
           </div>
         </div>
       </div>
