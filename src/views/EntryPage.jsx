@@ -1,10 +1,8 @@
 import React from 'react';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import '../css/EntryPage.scss';
 
-export default function EntryPage({ categories, addTransaction }) {
-  const paymentType = useRef(['Make payment', 'Receive payment']);
-
+export default function EntryPage({ categories, addTransaction, paymentType }) {
   const initialState = {
     amount: '',
     txnDate: '',
@@ -24,7 +22,7 @@ export default function EntryPage({ categories, addTransaction }) {
   const onChange = (event) => {
     const name = event.target.name;
     let value = event.target.value;
-    
+
     if (name === 'amount') value = value.replace(/[^0-9.]/g, '');
 
     setState({ ...state, [name]: value });
@@ -51,7 +49,7 @@ export default function EntryPage({ categories, addTransaction }) {
             Payment Type
             <select value={state.paymentType} onChange={onChange} required name='paymentType'>
               <option hidden value="">select</option>
-              {paymentType.current.map(type =>
+              {paymentType.map(type =>
                 <option key={type} value={type}>{type}</option>
               )}
             </select>

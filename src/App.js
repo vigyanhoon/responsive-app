@@ -7,11 +7,13 @@ import EntryPage from './views/EntryPage';
 import FilterPage from './views/FilterPage';
 import ExpensePage from './views/ExpensePage';
 import AnalysisPage from './views/AnalysisPage';
-import { sortByDate } from './Utils';
+import { sortByDate } from './common/Utils';
+import {CATEGORIES, MAKE, RECEIVE, CURRENT, MONTHLY} from './common/Constants'
 
 function App() {
-  const categories = useRef(['Medical', 'Travel', 'Loans',
-    'Utility Bills', 'Education', 'Shopping', 'Misc']);
+  const categories = useRef(CATEGORIES);
+  const paymentType = useRef([MAKE, RECEIVE]);
+  const periodType = useRef([CURRENT, MONTHLY]);
   const [filteredData, setFilteredData] = useState([]);
   const [last10Transactions, setLast10Transactions] = useState([]);
   const [transactionNo, setTransactionNo] = useState(0);
@@ -20,21 +22,23 @@ function App() {
 
   const addTransaction = (transaction) => {
     transaction.amount = parseFloat(transaction.amount);
+    transaction.txnDate = new Date(transaction.txnDate);
 
-    if (transaction.paymentType === 'Make payment' && balance < transaction.amount) {
-      alert('You balance ' + balance + ' is insufficient for transfer of ' + transaction.amount);
+    const { amount, paymentType } = transaction
+
+    if (paymentType === MAKE && balance < amount) {
+      alert('You balance ' + balance + ' is insufficient for transfer of ' + amount);
       return;
     }
 
-    if (transaction.paymentType === 'Receive payment') {
-      setBalance(balance + transaction.amount);
+    if (paymentType === RECEIVE) {
+      setBalance(balance + amount);
     }
     else {
-      setBalance(balance - transaction.amount);
+      setBalance(balance - amount);
     }
 
     transaction.txnId = transactionNo;
-    transaction.txnDate = new Date(transaction.txnDate);
     setLast10(transaction);
     setAll(transaction);
     setTransactionNo(transactionNo + 1);
@@ -60,7 +64,7 @@ function App() {
 
   const filterData = (filter) => {
     let data;
-    if (filter.frequency === 'current') {
+    if (filter.frequency === CURRENT) {
       data = last10Transactions;
     }
     else {
@@ -69,7 +73,7 @@ function App() {
     }
 
     if (filter.category) {
-      data = data.filter(item=>{
+      data = data.filter(item => {
         return item.category === filter.category
       })
     }
@@ -90,9 +94,9 @@ function App() {
     <div className="app">
       <Header balance={balance} />
       <div className='content'>
-        <EntryPage categories={categories.current} addTransaction={addTransaction} />
+        <EntryPage categories={categories.current} addTransaction={addTransaction} paymentType={paymentType.current} />
         <div className='rightPane'>
-          <FilterPage categories={categories.current} filterData={filterData} />
+          <FilterPage categories={categories.current} filterData={filterData} periodType={periodType.current}/>
           <div className='bottomPane'>
             <ExpensePage filteredData={filteredData} />
             <AnalysisPage />

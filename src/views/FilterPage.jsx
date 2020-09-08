@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import {useState} from 'react';
 import '../css/FilterPage.scss';
+import {MONTHLY} from '../common/Constants'
 
-export default function FilterPage({ categories, filterData }) {
+export default function FilterPage({ categories, filterData, periodType }) {
   const initialState = {
     frequency: '',
     date: '',
@@ -32,13 +33,14 @@ export default function FilterPage({ categories, filterData }) {
             Frequency
             <select required value={state.frequency} onChange={onChange} name='frequency'>
               <option hidden value=''>select</option>
-              <option value='current'>Current</option>
-              <option value='monthly'>Monthly</option>
+              {periodType.map(type =>
+                <option key={type} value={type}>{type}</option>
+              )}
             </select>
           </label>
           <label>
             Month
-            <input disabled={state.frequency!=='monthly'} type='month' value={state.date}
+            <input disabled={state.frequency!==MONTHLY} type='month' value={state.date}
               onChange={onChange} name='date'/>
           </label>
           <label>
